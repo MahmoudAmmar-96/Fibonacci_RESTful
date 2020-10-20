@@ -120,6 +120,9 @@ venv.bak/
 # mkdocs documentation
 /site
 
+#exclude db file
+combinations.db
+
 # mypy
 .mypy_cache/
 .dmypy.json
