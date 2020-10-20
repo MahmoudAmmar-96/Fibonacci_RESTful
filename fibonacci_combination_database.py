@@ -57,5 +57,7 @@ class FibonacciCombinationDatabase:
         return self.cur.fetchone()
 
     def __del__(self):
-        """ Destroys instance and connection on completion of called method """
+        """
+        Destroys instance and connection on completion of called method 
+        """
         self.conn.close()
