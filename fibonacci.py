@@ -18,10 +18,11 @@ def abort_if_less_than_two(value):
 class Fibonacci(Resource):
 
     def get(self, value):
-        abort_if_less_than_two(value)
 
+        abort_if_less_than_two(value)
         db = FibonacciCombinationDatabase()
 
+        # Check if the combination of the value is already calculated and saved in the database
         if db.get_combination(value) is None:
             fibonacciTerms = FibonacciSequence(value).generated_list
             fibCombinationSum = CombinationSum(
