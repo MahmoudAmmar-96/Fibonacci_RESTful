@@ -2,6 +2,7 @@ from flask import Flask
 from flask_restful import Resource, Api, abort
 from fibonacci_sequence import FibonacciSequence
 from combination_sum import CombinationSum
+from fibonacci_combination_database import FibonacciCombinationDatabase
 
 app = Flask(__name__)
 api = Api(app)
@@ -18,10 +19,21 @@ class Fibonacci(Resource):
 
     def get(self, value):
         abort_if_less_than_two(value)
-        fibonacciTerms = FibonacciSequence(value).generated_list
-        fibCombinationSum = CombinationSum(
-            fibonacciTerms, value).fibonacci_combination
+
+        db = FibonacciCombinationDatabase()
+        
+        if db.check_number(value) is None:
+            fibonacciTerms = FibonacciSequence(value).generated_list
+            fibCombinationSum = CombinationSum(
+                fibonacciTerms, value).fibonacci_combination
+            db.add_combination(value, str([fibCombinationSum]))
+            print('lol')
+        else:
+            fibCombinationSum = db.check_number(value)
+        
         return {'result': fibCombinationSum}
+            
+
 
 
 api.add_resource(Fibonacci, '/fib/<int:value>')
