@@ -19,7 +19,7 @@ class FibonacciCombinationDatabase:
         self.execute(
             '''INSERT INTO Combinations (number, combination) VALUES (?,?)''', (number, combination))
 
-    def check_number(self, num):
+    def get_combination(self, num):
         self.execute(
             '''SELECT combination FROM Combinations WHERE number = ? ''', (num,))
         return self.cur.fetchone()

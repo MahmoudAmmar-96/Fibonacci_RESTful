@@ -22,13 +22,13 @@ class Fibonacci(Resource):
 
         db = FibonacciCombinationDatabase()
 
-        if db.check_number(value) is None:
+        if db.get_combination(value) is None:
             fibonacciTerms = FibonacciSequence(value).generated_list
             fibCombinationSum = CombinationSum(
                 fibonacciTerms, value).fibonacci_combination
             db.add_combination(value, str([fibCombinationSum]))
         else:
-            fibCombinationSum = db.check_number(value)
+            fibCombinationSum = db.get_combination(value)
 
         return {'result': fibCombinationSum}
 
